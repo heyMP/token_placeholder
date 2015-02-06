@@ -1,0 +1,5 @@
+name = Token Placeholder
+description = Render a preview of tokens in the wysywig
+core = 7.x
+
+scripts[] = token_placeholder.js

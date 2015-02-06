@@ -1,0 +1,19 @@
+<?php
+
+
+function token_placeholder_field_widget_form_alter(&$element, &$form_state, $context) {
+  // Make sure the html2cavas is loaded
+  libraries_load('html2canvas');
+
+  $token_options = array('callback' => 'token_placeholder_token_replace_placeholder');
+  $element['#default_value'] = token_replace($element['#default_value'], array(), $token_options);
+}
+
+function token_placeholder_token_replace_placeholder(&$tokens) {
+  foreach ($tokens as $key => &$token) {
+    $token = '<span class="token-placeholder">' . $key . '</span>';
+  }
+  dpm($tokens);
+  drupal_add_js(array('token_placeholder' => array('token_placeholder_tokens' => $tokens)), 'setting');
+}
+
